@@ -6,8 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
-var register = require('./src/routes/index');
-
 var app = express();
 
 // view engine setup
@@ -27,6 +25,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-register.registerRoute(app);
+app.use('/', require('./src/routes/index'));
 
-app.listen(8006);
+module.exports = app;
