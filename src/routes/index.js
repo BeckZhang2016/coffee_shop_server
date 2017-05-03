@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 
-app.use('/login', require('./login.js'));
+app.use('/login', require('./users/login.js'));
+app.use('/register', require('./users/register.js'));
+app.use('/users', require('./users/users.js'));
 app.use('/home', require('./home.js'));
 
 // catch 404 and forward to error handler
