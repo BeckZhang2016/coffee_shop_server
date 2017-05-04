@@ -6,6 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
+var expressJwt = require('express-jwt');
+var secret = 'coffeeShop';
+
 var app = express();
 
 // view engine setup
@@ -24,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', expressJwt({secret: secret}));
 app.use('/webServer/api', require('./src/routes/index'));
 
 module.exports = app;
