@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 
 var expressJwt = require('express-jwt');
-var secret = 'coffeeShop';
+var secret = require('./src/config/config.js');
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', expressJwt({secret: secret}));
+app.use('/', expressJwt({secret: secret.secret.key}));
 app.use('/webServer/api', require('./src/routes/index'));
 
 module.exports = app;

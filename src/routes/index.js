@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var jwt = require('jsonwebtoken');
 
 app.use('/login', require('./users/login.js'));
 app.use('/register', require('./users/register.js'));

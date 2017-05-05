@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var userDao = require('../../dao/usersDao.js');
+var jwt = require('jsonwebtoken');
 
 router.post('/',function (req, res, next) {
   userDao.login({username: req.username, password: req.password}, function (err) {
@@ -12,6 +13,7 @@ router.post('/',function (req, res, next) {
     if(count == 0){
       res.status(500).send('Incorrect username or password!')
     }
+
     res.status(200).json();
   })
 });

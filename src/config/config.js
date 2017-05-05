@@ -9,5 +9,8 @@ module.exports = {
       password: '123456',
       database: 'coffee_shop'
     }
+  },
+  secret: {
+    key: 'coffeeShop'
   }
 };
