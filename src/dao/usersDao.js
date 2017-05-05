@@ -3,7 +3,9 @@
  */
 
 var sqlUtils = require('../utils/sqlUtils.js');
+
 var userDao = {};
+var _ = require('lodash');
 
 userDao.register = function (userInfos, errorHandle, successHandle) {
   var sql = 'INSERT INTO cfs_user(username, password, email, phone) VALUES (?, ?, ?, ?)';
@@ -23,5 +25,22 @@ userDao.login = function (userInfos, errorHandle, successHandle) {
   });
 };
 
+userDao.getUserInfo = function (userInfos, errorHandle, successHandle) {
+  var sql = 'SELECT username, email, last_login_date, nickname FROM cfs_user WHERE username=?';
+  var params = [userInfos.username];
+  sqlUtils.query(sql, params, function (err, results) {
+    if(err){errorHandle(err)}
+    successHandle(results[0]);
+  });
+};
+
+userDao.updateLoginDatetime = function (userInfos, errorHandle, successHandle) {
+  var sql = 'UPDATE cfs_user SET last_login_date=? WHERE username=?';
+  var params = [userInfos.last_login_date, userInfos.username];
+  sqlUtils.query(sql, params, function (err, results) {
+    if(err){errorHandle(err)}
+    successHandle(results);
+  });
+};
 
 module.exports = userDao;

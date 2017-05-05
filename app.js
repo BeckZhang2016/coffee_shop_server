@@ -30,4 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', expressJwt({secret: secret.secret.key}));
 app.use('/webServer/api', require('./src/routes/index'));
 
-module.exports = app;
+app.listen(8009,function () {
+  console.log('server is running on the %d', 8009);
+});
+
+// module.exports = app;
